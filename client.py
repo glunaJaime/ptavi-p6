@@ -10,7 +10,12 @@ import socket
 
 # Dirección IP del servidor.
 SERVER = 'localhost'
-PORT = 6001
+METHOD = sys.argv[1]
+DIR = sys.argv[2]
+LOGIN = DIR.split('@')[0]
+IP = DIR.split(':')[0], split('@')[1]
+PORT = int(DIR.SPLIT(':')[1])
+
 
 # Contenido que vamos a enviar
 LINE = '¡Hola mundo!'
