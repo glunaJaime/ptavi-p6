@@ -8,8 +8,8 @@ import socket
 import sys
 
 # Cliente UDP simple.
-if len(sys.argv)!=3
-sys.exit('Usage: python client.py method reciever@IP:SIPport')
+if len(sys.argv)!=3:
+	sys.exit('Usage: python client.py method reciever@IP:SIPport')
 
 
 # Dirección IP del servidor.
@@ -24,12 +24,12 @@ SERVER = 'localhost'
 METHOD = sys.argv[1]
 DIR = sys.argv[2]
 LOGIN = DIR.split('@')[0] 
-IP = DIR.split(':')[0], split('@')[1]
-PORT = int(DIR.SPLIT(':')[1])
+IP = DIR.split(':')[0].split('@')[1]
+PORT = int(DIR.split(':')[1])
 
 
 #Enviamos:
-LINE = METHOD + 'sip:' + RECEPTOR + '@' + IP + 'SIP/2.0\r\n\r\n'
+LINE = METHOD + 'sip:' + DIR + '@' + IP + 'SIP/2.0\r\n\r\n'
 
 
 
@@ -45,7 +45,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as my_socket:
 #Envio el ACK en caso de recibir el TRYING, RING y OK
 rec_invite = data.decode('utf-8').split('\r\n\r\n')[0:-1]
     
-    print('Recibido -- ', data.decode('utf-8'))
-    print("Terminando socket...")
+print('Recibido -- ', data.decode('utf-8'))
+print("Terminando socket...")
 
 print("Fin.")
