@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-"""
-Clase (y programa principal) para un servidor de eco en UDP simple
-"""
+"""Clase (y programa principal) para un servidor de eco en UDP simple."""
 
 import socketserver
 import sys
@@ -22,13 +20,14 @@ else:
 
 class EchoHandler(socketserver.DatagramRequestHandler):
 
+
     def handle(self):
         # Escribe dirección y puerto del cliente (de tupla client_address)
-        #self.wfile.write(b"Hemos recibido tu peticion")
+        # self.wfile.write(b"Hemos recibido tu peticion")
         while 1:
             # Leyendo línea a línea lo que nos envía el cliente
             line = self.rfile.read()
-            #print("El cliente nos manda " + line.decode('utf-8'))
+            # print("El cliente nos manda " + line.decode('utf-8'))
 
             method = line.decode('utf-8').split(' ')[0]
             # Si no hay más líneas salimos del bucle infinito
@@ -39,22 +38,22 @@ class EchoHandler(socketserver.DatagramRequestHandler):
                 message = b"SIP/2.0 100 Trying SIP/2.0 180 Ring SIP/2.0 200 Ok"
                 self.wfile.write(message)
             elif method == 'ACK':
-                #print("llega")
+                # print("llega")
                 # aEjecutar es un string
                 # con lo que se ha de ejecutar en la shell:
                 aEjecutar = ('./mp32rtp -i 127.0.0.1 -p 23032 <' + sys.argv[3])
                 print("Vamos a Ejecutar: ", aEjecutar)
-                #message = b"SIP/2.0 200 OK \r\n\r\n"
+                # message = b"SIP/2.0 200 OK \r\n\r\n"
                 os.system(aEjecutar)
                 print("Cancion Enviada")
             elif method == 'BYE':
                 message = b"SIP/2.0 200 Ok \r\n\r\n"
                 self.wfile.write(message)
-            else: 
+            else:
                 sys.exit("METHOD not allowed")
                 sel.wfile.write(b'SIP/2.0 400 Bad Request \r\n\r\n')
 
-			
+
 if __name__ == "__main__":
     # Creamos servidor de eco y escuchamos
     try:
