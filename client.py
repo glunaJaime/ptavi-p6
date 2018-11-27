@@ -23,7 +23,7 @@ try:
     LOGIN = DIR.split('@')[0]
     IP = DIR.split(':')[0].split('@')[1]
     PORT = int(DIR.split(':')[1])
-except:
+except NameError:
     sys.exit('Usage: python client.py method reciever@IP:SIPport')
 
     # Enviamos:
