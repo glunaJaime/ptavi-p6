@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-"""
-Programa cliente que abre un socket a un servidor
-"""
+"""Programa cliente que abre un socket a un servidor."""
 
 import socket
 import sys
@@ -44,8 +42,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as my_socket:
     message = data.decode('utf-8').split('\r\n\r\n')
     print(message)
     if message == ['SIP/2.0 100 Trying SIP/2.0 180 Ring SIP/2.0 200 Ok']:
-        print("fasdfas")
-        msack = 'ACK ' + DIR + '@' + IP + 'SIP/2.0\r\n'
+        msack = 'ACK ' + DIR + '@' + IP + ' SIP/2.0\r\n'
+        print(msack)
         print("Enviamos: " + msack)
         my_socket.send(bytes(msack, 'utf-8') + b'\r\n')
     if message == b"SIP/2.0 200 OK \r\n":
